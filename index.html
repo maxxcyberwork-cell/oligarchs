@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLIGARCHS – Your Ticket to Gaming Excitement</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loader-overlay" id="loader-overlay" aria-hidden="false">
+    <img src="assets/logo.png" alt="OLIGARCHS" class="loader-logo">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading...</p>
+  </div>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="#nav" class="skip-link">Skip to navigation</a>
+
+  <header class="site-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="brand">
+            <a href="index.html" class="brand-link">
+              <img src="assets/logo-header.png" alt="OLIGARCHS ESPORTS" class="header-logo">
+              <span class="site-name">OLIGARCHS ESPORTS</span>
+            </a>
+          </div>
+          <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav">
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+        </button>
+          <div class="auth-buttons">
+            <button type="button" class="btn btn--outline" id="auth-login-btn">Login</button>
+            <button type="button" class="btn btn--primary" id="auth-signup-btn">Sign Up</button>
+          </div>
+        </div>
+        <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="community-reg.html" class="nav-link">Community Reg</a></li>
+            <li><a href="rulebook.html" class="nav-link">Rulebook</a></li>
+            <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+            <li><a href="recruitment.html" class="nav-link">Recruitment</a></li>
+            <li><a href="#events" class="nav-link" onclick="openEventsModal()">Events</a></li>
+            <li><a href="tournaments.html" class="nav-link">Tournaments</a></li>
+            <li><a href="tournaments.html#host" class="nav-link">Host Tournament</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-flames" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1 class="hero-title"><span class="hero-subtitle">WELCOME TO</span><br>OLIGARCHS ESPORTS</h1>
+        <img src="assets/logo.png" alt="OLIGARCHS – Your Ticket to Gaming Excitement" class="hero-logo" onclick="showWelcomePopup()">
+        <p class="hero-tagline">YOUR TICKET TO GAMING EXCITEMENT</p>
+        <p class="hero-focus">NOW ONLY FOCUSING ON FREE FIRE</p>
+        <a href="tournaments.html" class="btn btn--primary">View Tournaments</a>
+        <a href="recruitment.html" class="btn btn--secondary">Join OLIGARCHS (Recruitment)</a>
+      </div>
+      <div class="hero-glare"></div>
+    </section>
+
+    <div id="welcome-popup" class="welcome-popup" onclick="hideWelcomePopup()">
+      <div class="popup-content">
+        <div class="popup-main">WELCOME TO ESPORTS</div>
+        <div class="popup-question">What is Esports?</div>
+        <p class="popup-explanation">Esports refers to competitive electronic sports where individuals or teams compete in video games, often in organized tournaments.</p>
+      </div>
+    </div>
+
+    <!-- Login/Sign Up Modal (unified, same on all pages) -->
+    <div class="modal-overlay" id="auth-modal" aria-hidden="true">
+      <div class="modal" role="dialog" aria-labelledby="auth-modal-title">
+        <button type="button" class="modal-close" id="auth-modal-close" aria-label="Close">&times;</button>
+        <h3 id="auth-modal-title">Login / Sign Up</h3>
+        <div class="auth-modal-tabs">
+          <button type="button" class="auth-modal-tab active" id="auth-tab-login">Login</button>
+          <button type="button" class="auth-modal-tab" id="auth-tab-signup">Sign Up</button>
+        </div>
+        <form id="auth-login-form" class="auth-form" style="display: block;">
+          <div class="auth-form-group">
+            <label for="auth-login-email">Email</label>
+            <input type="email" id="auth-login-email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="auth-form-group">
+            <label for="auth-login-password">Password</label>
+            <input type="password" id="auth-login-password" name="password" required placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn--primary" style="width: 100%;">Login</button>
+        </form>
+        <form id="auth-signup-form" class="auth-form" style="display: none;">
+          <div class="auth-form-row">
+            <div class="auth-form-group">
+              <label for="auth-signup-firstName">First Name</label>
+              <input type="text" id="auth-signup-firstName" name="firstName" required placeholder="John">
+            </div>
+            <div class="auth-form-group">
+              <label for="auth-signup-lastName">Last Name</label>
+              <input type="text" id="auth-signup-lastName" name="lastName" required placeholder="Doe">
+            </div>
+          </div>
+          <div class="auth-form-group">
+            <label for="auth-signup-email">Email</label>
+            <input type="email" id="auth-signup-email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="auth-form-group">
+            <label for="auth-signup-username">Username</label>
+            <input type="text" id="auth-signup-username" name="username" required placeholder="gamer123">
+          </div>
+          <div class="auth-form-group">
+            <label for="auth-signup-password">Password</label>
+            <input type="password" id="auth-signup-password" name="password" required placeholder="Min 8 chars, upper, lower, number">
+          </div>
+          <div class="auth-form-group">
+            <label for="auth-signup-confirm">Confirm Password</label>
+            <input type="password" id="auth-signup-confirm" name="confirmPassword" required placeholder="Re-enter password">
+          </div>
+          <div class="auth-form-group">
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; font-weight: 400; text-transform: none;">
+              <input type="checkbox" name="terms" required>
+              <span>I agree to <a href="community-reg.html" target="_blank">Community Reg</a> & <a href="rulebook.html" target="_blank">Rulebook</a></span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn--primary" style="width: 100%;">Create Account</button>
+        </form>
+        <p id="auth-message" style="margin-top: 1rem; text-align: center; font-size: 0.9rem;"></p>
+      </div>
+    </div>
+
+  <!-- Achievements Modal -->
+  <div class="modal-overlay" id="achievements-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="achievements-modal-title">
+      <button type="button" class="modal-close" id="achievements-modal-close" aria-label="Close">&times;</button>
+      <h3 id="achievements-modal-title">All Achievements</h3>
+      <div class="achievements-modal-grid">
+        <div class="achievement-card">
+          <img src="assets/achievements/WNT CHAMPIONSHIP.jpeg" alt="WNT Championship">
+          <p>(WNT CHAMPIONS LEAGUE S2- 2ND RUNNER UP)</p>
+        </div>
+        <div class="achievement-card">
+          <img src="assets/achievements/FF PRO SERIES.jpeg" alt="FF Pro Series">
+          <p>(FF PRO SERIES- 2ND RUNNER UP)</p>
+        </div>
+        <div class="achievement-card">
+          <img src="assets/achievements/SUMMER CUP.jpeg" alt="Summer Cup">
+          <p>(SUMMER BOOYAH CUP CHAMPIONS)</p>
+        </div>
+        <div class="achievement-card">
+          <img src="assets/achievements/BATTLE OF TITANS.jpeg" alt="Battle of Titans">
+          <p>(BATTLE OF TITAN SEASON 1- 2ND RUNNER UP)</p>
+        </div>
+        <div class="achievement-card">
+          <img src="assets/achievements/RCE ESPORTS CHAMPIONSHIP.jpeg" alt="RCE Esports Championship">
+          <p>(RCE SPORTS CHAMPIONS SEASON 1)</p>
+        </div>
+        <div class="achievement-card">
+          <img src="assets/achievements/FFMIC GRAND QUALIFIERS.jpeg" alt="FFMIC Grand Qualifiers">
+          <p>(FFMIC GRAND QUALIFIERS- GRAND FINALIST)</p>
+        </div>
+        <div class="achievement-card">
+          <img src="assets/achievements/CHAOS ARENA GRAN FINAL.jpeg" alt="Chaos Arena Grand Final">
+          <p>(CHAOS ARENA GRAND FINAL- 3RD PLACE)</p>
+        </div>
+        <div class="achievement-card">
+          <img src="assets/achievements/CHALLENGER SERIES CHAMPIONS.jpeg" alt="Challenger Series Champions">
+          <p>(CHALLENGER SERIES CHAMPIONS)</p>
+        </div>
+        <div class="achievement-card">
+          <img src="assets/achievements/PGL ESPORTS WINNERS.jpeg" alt="PGL Esports Winners">
+          <p>(PGL ESPORTS WINNERS)</p>
+        </div>
+        <div class="achievement-card">
+          <img src="assets/achievements/6TH ANIVERSARY TOURNAMENTS.jpeg" alt="6th Anniversary Tournaments">
+          <p>(6TH ANNIVERSARY TOURNAMENTS- 2ND RUNNER UP)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events Modal -->
+  <div class="modal-overlay" id="events-modal" aria-hidden="true">
+    <div class="modal modal--events" role="dialog" aria-labelledby="events-modal-title">
+      <button type="button" class="modal-close" id="events-modal-close" aria-label="Close">&times;</button>
+      <h3 id="events-modal-title">All Upcoming Events</h3>
+      <div class="events-modal-content" id="events-modal-content">
+        <!-- Events will be dynamically loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Details Modal -->
+  <div class="modal-overlay" id="event-details-modal" aria-hidden="true">
+    <div class="modal modal--event-details" role="dialog" aria-labelledby="event-details-modal-title">
+      <button type="button" class="modal-close" id="event-details-modal-close" aria-label="Close">&times;</button>
+      <div id="event-details-content">
+        <!-- Event details will be dynamically loaded here -->
+      </div>
+    </div>
+  </div>
+
+    <div class="main-content">
+      <div class="left-column">
+        <section id="achievements" class="section section--achievements">
+          <div class="container">
+            <h2 class="section-title">Our Achievements</h2>
+            <div class="achievements-grid">
+              <div class="achievement-card">
+                <img src="assets/achievements/WNT CHAMPIONSHIP.jpeg" alt="WNT Championship">
+                <p>(WNT CHAMPIONS LEAGUE S2- 2ND RUNNER UP)</p>
+              </div>
+              <div class="achievement-card">
+                <img src="assets/achievements/FF PRO SERIES.jpeg" alt="FF Pro Series">
+                <p>(FF PRO SERIES- 2ND RUNNER UP)</p>
+              </div>
+              <div class="achievement-card">
+                <img src="assets/achievements/SUMMER CUP.jpeg" alt="Summer Cup">
+                <p>(SUMMER BOOYAH CUP CHAMPIONS)</p>
+              </div>
+              <div class="achievement-card">
+                <img src="assets/achievements/BATTLE OF TITANS.jpeg" alt="Battle of Titans">
+                <p>(BATTLE OF TITAN SEASON 1- 2ND RUNNER UP)</p>
+              </div>
+              <div class="achievement-card view-more-card" onclick="window.location.href='achievements.html'">
+                <img src="assets/achievements/RCE ESPORTS CHAMPIONSHIP.jpeg" alt="View More">
+                <div class="view-more-content">
+                  <span>+5 More</span>
+                  <p>View All Achievements</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      
+      <!-- Events Section -->
+      <div class="full-width-section">
+        <section id="events" class="section section--events">
+          <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <p style="color: var(--text-muted); text-align: center; margin-bottom: 2rem;">No upcoming events.</p>
+            <div class="events-grid" id="events-grid">
+              <!-- Events will be dynamically loaded here -->
+            </div>
+            <div class="events-cta">
+              <a href="#events-modal" class="btn btn--primary" onclick="openEventsModal()">View All Events</a>
+            </div>
+          </div>
+        </section>
+      </div>
+      
+      <div class="right-column">
+        <section id="social-updates" class="section section--social-updates">
+          <div class="container">
+            <h2 class="section-title">Social Media Updates</h2>
+            <div class="social-updates-content">
+              <div class="media-embeds">
+                <div class="instagram-section">
+                  <h3>Instagram Highlights</h3>
+                  <div class="embed-placeholder">
+                    <p>🏆 Tournament Victory Celebration</p>
+                    <div style="background: linear-gradient(135deg, #1a1a1e, #2a2a2e); border-radius: 12px; padding: 15px; text-align: center; border: 1px solid var(--border); cursor: pointer; transition: all 0.3s ease;" onclick="window.open('https://www.instagram.com/oligarchs.esp', '_blank')">
+                      <img src="assets/instagram/post-1.png" alt="OLIGARCHS Tournament Victory" style="width: 100%; max-width: 300px; height: auto; border-radius: 8px; margin-bottom: 10px; object-fit: cover;">
+                      <p style="color: var(--text); font-size: 14px; margin: 10px 0;">
+                        <strong>@oligarchs.esp</strong><br>
+                        Another tournament in the bag! 🏆 #OLIGARCHSEsports #FreeFire #Victory
+                      </p>
+                      <div style="color: var(--red-primary); text-decoration: none; font-weight: 600; font-size: 14px;">Click to view on Instagram →</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="youtube-section">
+                  <h3>YouTube Highlights</h3>
+                  <div class="embed-placeholder">
+                    <p>🎥 OLIGARCHS Esports - Tournament Highlights</p>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px; background: #000;">
+                      <iframe 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                        src="https://www.youtube.com/embed/-TuWSKxepe0?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1" 
+                        title="OLIGARCHS Esports Tournament Highlights"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                      </iframe>
+                    </div>
+                  </div>
+                  <div class="embed-placeholder">
+                    <p>🎯 Best Plays of the Season</p>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px; background: #000;">
+                      <iframe 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                        src="https://www.youtube.com/embed/jeYT3frfYk4?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1" 
+                        title="OLIGARCHS Best Plays"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                      </iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section id="about" class="section section--about">
+      <div class="container">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-content">
+          <p class="about-text">
+            OLIGARCHS is dedicated to attracting and nurturing the talent of gamers by promoting esports as a viable and exciting career path. Our motive is to showcase the numerous opportunities within the esports industry, ensuring that players and teams are well-informed and supported. We strive to provide comprehensive support to esports teams and organizations, helping them grow and succeed in the competitive gaming landscape.
+          </p>
+          <p class="about-text">
+            Let OLIGARCHS become a new milestone in the history of competitive gaming. If we all stand together, we can successfully conduct events and elevate our community to the top. We must support and bring together all players, gamers, esports teams, orgs, and creators. With everyone united, we can achieve anything.
+          </p>
+          <p class="about-slogan">#TogetherWeRise</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="partners" class="section section--partners">
+      <div class="container">
+        <h2 class="section-title">Our Partners</h2>
+        <div class="partners-grid">
+          <div class="partner-card">
+            <div class="partner-placeholder">Partner 1</div>
+          </div>
+          <div class="partner-card">
+            <div class="partner-placeholder">Partner 2</div>
+          </div>
+          <div class="partner-card">
+            <div class="partner-placeholder">Partner 3</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="feedback" class="section section--feedback">
+      <div class="container">
+        <h2 class="section-title">Your Feedback</h2>
+        <p class="feedback-intro">
+          Your feedback is very important for the growth of the OLIGARCHS community. Share your comments and suggestions for improvement. Your every word is valuable to us.
+        </p>
+        <a href="#feedback-form" class="btn btn--secondary" id="feedback-btn">Open Feedback Form</a>
+        <div id="feedback-form" class="feedback-form-wrapper" aria-hidden="true" hidden>
+          <form class="feedback-form" id="feedback-form-el" action="#" method="post">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Your feedback..."></textarea>
+            <button type="submit" class="btn btn--primary">Submit Feedback</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="social" class="section section--social">
+      <div class="container">
+        <h2 class="section-title">Connect With Us</h2>
+        <p class="social-intro">SOCIAL MEDIA LINKS — CLICK TO OPEN</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/oligarchs.esp?igsh=MWY0cmh4ZjgyNDZmdA==" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">Instagram</a>
+          <a href="https://discord.gg/Qr5Xqv5EP" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Discord">Discord</a>
+          <a href="mailto:oligarchsesports@gmail.com" class="social-link" aria-label="Email">Email</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-text">GO TO TOP AND EXPLORE PAGES. THANK YOU!</p>
+      <a href="#main" class="footer-top">Back to top</a>
+      <p style="font-size: small; text-align: center; color: var(--text-muted); margin-top: 10px;">Made by MAXX CYBER</p>
+    </div>
+  </footer>
+
+  <button type="button" class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">↑</button>
+
+  <script src="js/auth-security.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/maxx-ai.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/events-gallery.js"></script>
+  <script src="js/admin-editor.js"></script>
+
+  <script>
+    // Hamburger menu toggle
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      document.getElementById('main-nav').classList.toggle('is-open');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function (e) {
+      const nav = document.getElementById('main-nav');
+      const toggle = document.getElementById('nav-toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target) && nav.classList.contains('is-open')) {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Auth modal + Login/Sign Up handled by js/auth.js
+
+    // Loading screen – hide when page fully loaded
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loader-overlay');
+      if (loader) { loader.classList.add('hidden'); loader.setAttribute('aria-hidden', 'true'); }
+    });
+    setTimeout(function() {
+      const loader = document.getElementById('loader-overlay');
+      if (loader && !loader.classList.contains('hidden')) loader.classList.add('hidden');
+    }, 4000);
+
+    // Scroll to top + open auth modal from URL
+    document.addEventListener('DOMContentLoaded', function() {
+      const scrollBtn = document.getElementById('scroll-to-top');
+      if (scrollBtn) {
+        window.addEventListener('scroll', function() { scrollBtn.classList.toggle('visible', window.scrollY > 400); });
+        scrollBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      }
+      var params = new URLSearchParams(window.location.search);
+      var auth = params.get('auth');
+      if (auth === 'login' || auth === 'signup') {
+        setTimeout(function() {
+          if (window.OligarchsAuthModal) window.OligarchsAuthModal.open(auth);
+        }, 600);
+        if (auth === 'login' || auth === 'signup') history.replaceState({}, '', 'index.html');
+      }
+    });
+  </script>
+  <!-- YouTube video error handling -->
+  <script>
+    // YouTube video error handling
+    window.addEventListener('load', function() {
+      const youtubeIframes = document.querySelectorAll('iframe[src*="youtube.com"]');
+      
+      youtubeIframes.forEach(function(iframe) {
+        iframe.addEventListener('error', function() {
+          // If YouTube fails to load, show fallback
+          const container = iframe.parentElement;
+          container.innerHTML = `
+            <div style="background: linear-gradient(135deg, #1a1a1e, #2a2a2e); border-radius: 12px; padding: 15px; text-align: center; border: 1px solid var(--border); height: 200px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+              <div style="font-size: 3rem; margin-bottom: 1rem;">🎥</div>
+              <p style="color: var(--text); font-size: 16px; margin-bottom: 10px;">
+                <strong>YouTube Video</strong><br>
+                Check out our channel for amazing content!
+              </p>
+              <a href="https://www.youtube.com/@oligarchsesp" target="_blank" style="color: var(--red-primary); text-decoration: none; font-weight: 600;">Visit YouTube Channel →</a>
+            </div>
+          `;
+        });
+
+        // Add load timeout fallback
+        setTimeout(function() {
+          if (!iframe.contentDocument && !iframe.contentWindow) {
+            iframe.dispatchEvent(new Event('error'));
+          }
+        }, 5000);
+      });
+    });
+
+    // Hamburger menu toggle
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      document.getElementById('main-nav').classList.toggle('is-open');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function (e) {
+      const nav = document.getElementById('main-nav');
+      const toggle = document.getElementById('nav-toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target) && nav.classList.contains('is-open')) {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Ensure brand link works properly
+    document.querySelector('.brand-link').addEventListener('click', function(e) {
+      // Let the default link behavior work
+      console.log('Logo clicked - going to home');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rulebook – OLIGARCHS Esports</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .rulebook-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .rulebook-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .rule-nav-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .rule-nav-item:hover {
+      background: var(--bg-elevated);
+      border-color: var(--red-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
+    }
+    
+    .rule-nav-item.active {
+      background: var(--bg-elevated);
+      border-color: var(--red-primary);
+    }
+    
+    .rule-nav-item h3 {
+      color: var(--text);
+      margin-bottom: 8px;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+    }
+    
+    .rule-nav-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    .rule-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 30px;
+      display: none;
+    }
+    
+    .rule-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .rule-content h2 {
+      color: var(--text);
+      margin-bottom: 20px;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      border-bottom: 2px solid var(--red-primary);
+      padding-bottom: 10px;
+    }
+    
+    .rule-content h3 {
+      color: var(--text);
+      margin-top: 25px;
+      margin-bottom: 15px;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+    }
+    
+    .rule-content ul, .rule-content ol {
+      margin-left: 20px;
+      margin-bottom: 15px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    .rule-content li {
+      margin-bottom: 8px;
+    }
+    
+    .rule-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: var(--bg-elevated);
+    }
+    
+    .rule-content th, .rule-content td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+      color: var(--text);
+    }
+    
+    .rule-content th {
+      background: var(--bg-dark);
+      font-weight: 600;
+      font-family: var(--font-display);
+    }
+    
+    .rule-content .warning {
+      background: rgba(196, 30, 58, 0.1);
+      border-left: 4px solid var(--red-primary);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    
+    .rule-content .note {
+      background: rgba(192, 192, 192, 0.1);
+      border-left: 4px solid var(--silver);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    
+    .rule-content footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    
+    .admin-section {
+      margin-top: 2rem;
+      padding: 2rem 0;
+      background: var(--bg-elevated);
+    }
+    
+    .admin-panel {
+      background: var(--bg-elevated);
+      border: 2px solid var(--red-primary);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: none;
+    }
+    
+    .admin-panel.active {
+      display: block;
+    }
+    
+    .admin-panel h2 {
+      color: var(--red-primary);
+      margin-bottom: 20px;
+      font-family: var(--font-display);
+    }
+    
+    .admin-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .admin-btn {
+      background: var(--red-primary);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .admin-btn:hover {
+      background: var(--red-hover);
+      transform: translateY(-1px);
+    }
+    
+    .admin-btn.edit {
+      background: var(--silver);
+    }
+    
+    .admin-btn.edit:hover {
+      background: #a0a0a0;
+    }
+    
+    .editable {
+      position: relative;
+      padding: 5px;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    
+    .editable:hover {
+      background: rgba(196, 30, 58, 0.1);
+    }
+    
+    .editable:focus {
+      outline: 2px solid var(--red-primary);
+      background: rgba(196, 30, 58, 0.05);
+    }
+    
+    /* Rules Folder System Styles */
+    .rules-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--bg-elevated), var(--bg-dark));
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .rules-title {
+      color: var(--text);
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-display);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .rules-subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 0;
+    }
+    
+    .rules-folders-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .folder-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .folder-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(196, 30, 58, 0.2);
+      border-color: var(--red-primary);
+    }
+    
+    .folder-item.active {
+      background: var(--bg-elevated);
+      border-color: var(--red-primary);
+      box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+    }
+    
+    .folder-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red-primary), var(--red-hover));
+    }
+    
+    .folder-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
+    .folder-name {
+      color: var(--text);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-display);
+    }
+    
+    .folder-description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    
+    .folder-count {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--red-primary);
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    
+    .rules-content-area {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      min-height: 400px;
+    }
+    
+    .rules-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    
+    .breadcrumb-item {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .breadcrumb-item:hover {
+      color: var(--red-primary);
+    }
+    
+    .breadcrumb-item.active {
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .breadcrumb-separator {
+      color: var(--text-muted);
+      margin: 0 0.5rem;
+    }
+    
+    .rules-content {
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    .rules-content h2 {
+      color: var(--text);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-display);
+      border-bottom: 2px solid var(--red-primary);
+      padding-bottom: 0.5rem;
+    }
+    
+    .rules-content h3 {
+      color: var(--text);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-family: var(--font-display);
+    }
+    
+    .rules-content ul, .rules-content ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .rules-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .rules-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .rules-content th, .rules-content td {
+      border: 1px solid var(--border);
+      padding: 1rem;
+      text-align: left;
+      color: var(--text);
+    }
+    
+    .rules-content th {
+      background: var(--bg-dark);
+      font-weight: 600;
+      font-family: var(--font-display);
+    }
+    
+    .rules-content .warning {
+      background: rgba(196, 30, 58, 0.1);
+      border-left: 4px solid var(--red-primary);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+    }
+    
+    .rules-content .note {
+      background: rgba(192, 192, 192, 0.1);
+      border-left: 4px solid var(--silver);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+    }
+    
+    .admin-folder-controls {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: none;
+      gap: 0.5rem;
+    }
+    
+    .admin-folder-controls.show {
+      display: flex;
+    }
+    
+    .admin-folder-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+    
+    .admin-folder-btn:hover {
+      background: var(--red-primary);
+      color: white;
+      border-color: var(--red-primary);
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+    }
+    
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+    
+    .empty-state-text {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .empty-state-subtext {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    .admin-login-prompt {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .admin-login-prompt h3 {
+      color: var(--text);
+      margin-bottom: 15px;
+    }
+    
+    .admin-login-prompt input {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px;
+      border-radius: 4px;
+      margin-right: 10px;
+      width: 200px;
+    }
+    
+    .admin-login-prompt button {
+      background: var(--red-primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader-overlay" id="loader-overlay" aria-hidden="false">
+    <img src="assets/logo.png" alt="OLIGARCHS" class="loader-logo">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading...</p>
+  </div>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="#nav" class="skip-link">Skip to navigation</a>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="brand">
+          <a href="index.html" class="brand-link">
+            <img src="assets/logo-header.png" alt="OLIGARCHS ESPORTS" class="header-logo">
+            <span class="site-name">OLIGARCHS ESPORTS</span>
+          </a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav">
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+        </button>
+        <div class="auth-buttons">
+          <button type="button" class="btn btn--outline" id="auth-login-btn">Login</button>
+          <button type="button" class="btn btn--primary" id="auth-signup-btn">Sign Up</button>
+        </div>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="community-reg.html" class="nav-link">Community Reg</a></li>
+          <li><a href="rulebook.html" class="nav-link active">Rulebook</a></li>
+          <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+          <li><a href="recruitment.html" class="nav-link">Recruitment</a></li>
+          <li><a href="#events" class="nav-link" onclick="openEventsModal()">Events</a></li>
+          <li><a href="tournaments.html" class="nav-link">Tournaments</a></li>
+          <li><a href="tournaments.html#host" class="nav-link">Host Tournament</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-header">
+      <h1 class="page-title">OLIGARCHS RULEBOOK</h1>
+      <p class="page-subtitle">Free Fire MAX Tournament – Complete Rules & Regulations</p>
+    </section>
+
+    <div class="page-content">
+      <div class="rulebook-container">
+        
+        <!-- Free Fire Rules Header -->
+        <div class="rules-header">
+          <h1 class="rules-title">� FREE FIRE RULES</h1>
+          <p class="rules-subtitle">Complete tournament regulations and guidelines</p>
+        </div>
+
+        <!-- Rules Folder Navigation -->
+        <div class="rules-folders-nav" id="rules-folders-nav">
+          <!-- Folders will be dynamically loaded here -->
+        </div>
+
+        <!-- Rules Content Area -->
+        <div class="rules-content-area">
+          <div class="rules-breadcrumb" id="rules-breadcrumb">
+            <span class="breadcrumb-item active">� FREE FIRE RULES</span>
+          </div>
+          
+          <div class="rules-content" id="rules-content">
+            <!-- Rules content will be dynamically loaded here -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Hidden Admin Section - Only accessible to admins -->
+    <div class="admin-section" id="admin-section" style="display: none;">
+      <div class="container">
+        <div class="admin-panel" id="admin-panel">
+          <h2>🛠️ Admin Panel - Rule Management</h2>
+          <div class="admin-controls">
+            <button class="admin-btn" onclick="addNewRule()">➕ Add New Rule</button>
+            <button class="admin-btn edit" onclick="toggleEditMode()">✏️ Edit Mode</button>
+            <button class="admin-btn" onclick="exportRules()">📥 Export Rules</button>
+            <button class="admin-btn" onclick="importRules()">📤 Import Rules</button>
+          </div>
+          <div id="admin-status" style="color: var(--text-muted); font-size: 0.9rem;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Access Trigger - Hidden from regular users -->
+    <div class="admin-trigger" id="admin-trigger" style="display: none;">
+      <button onclick="showAdminLogin()" style="position: fixed; bottom: 20px; right: 20px; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px; border-radius: 8px; cursor: pointer; z-index: 1000;">
+        🔐 Admin
+      </button>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="modal-overlay" id="admin-login-modal" aria-hidden="true" style="display: none;">
+      <div class="modal" role="dialog" aria-labelledby="admin-login-modal-title">
+        <button type="button" class="modal-close" id="admin-login-modal-close" aria-label="Close">&times;</button>
+        <h3 id="admin-login-modal-title">Admin Access</h3>
+        <div style="padding: 20px;">
+          <p style="color: var(--text-muted); margin-bottom: 15px;">Enter admin password to access rule management</p>
+          <input type="password" id="admin-password-input" placeholder="Admin Password" style="background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text); padding: 10px; border-radius: 4px; width: 100%; margin-bottom: 15px;">
+          <button onclick="toggleAdminPanel()" style="background: var(--red-primary); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: 600; width: 100%;">Login</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Auth Modal (same on all pages) -->
+  <div class="modal-overlay" id="auth-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="auth-modal-title">
+      <button type="button" class="modal-close" id="auth-modal-close" aria-label="Close">&times;</button>
+      <h3 id="auth-modal-title">Login / Sign Up</h3>
+      <div class="auth-modal-tabs">
+        <button type="button" class="auth-modal-tab active" id="auth-tab-login">Login</button>
+        <button type="button" class="auth-modal-tab" id="auth-tab-signup">Sign Up</button>
+      </div>
+      <form id="auth-login-form" class="auth-form" style="display: block;">
+        <div class="auth-form-group"><label for="auth-login-email">Email</label><input type="email" id="auth-login-email" name="email" required placeholder="your@email.com"></div>
+        <div class="auth-form-group"><label for="auth-login-password">Password</label><input type="password" id="auth-login-password" name="password" required placeholder="Password"></div>
+        <button type="submit" class="btn btn--primary" style="width: 100%;">Login</button>
+      </form>
+      <form id="auth-signup-form" class="auth-form" style="display: none;">
+        <div class="auth-form-row"><div class="auth-form-group"><label>First Name</label><input type="text" name="firstName" required placeholder="John"></div><div class="auth-form-group"><label>Last Name</label><input type="text" name="lastName" required placeholder="Doe"></div></div>
+        <div class="auth-form-group"><label>Email</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="auth-form-group"><label>Username</label><input type="text" name="username" required placeholder="gamer123"></div>
+        <div class="auth-form-group"><label>Password</label><input type="password" name="password" required placeholder="Min 8 chars, upper, lower, number"></div>
+        <div class="auth-form-group"><label>Confirm Password</label><input type="password" name="confirmPassword" required placeholder="Re-enter password"></div>
+        <div class="auth-form-group"><label style="display: flex; align-items: flex-start; gap: 0.5rem; font-weight: 400; text-transform: none;"><input type="checkbox" name="terms" required><span>I agree to <a href="community-reg.html" target="_blank">Community Reg</a> & <a href="rulebook.html" target="_blank">Rulebook</a></span></label></div>
+        <button type="submit" class="btn btn--primary" style="width: 100%;">Create Account</button>
+      </form>
+      <p id="auth-message" style="margin-top: 1rem; text-align: center; font-size: 0.9rem;"></p>
+    </div>
+  </div>
+
+  <!-- Events Modal -->
+  <div class="modal-overlay" id="events-modal" aria-hidden="true">
+    <div class="modal modal--events" role="dialog" aria-labelledby="events-modal-title">
+      <button type="button" class="modal-close" id="events-modal-close" aria-label="Close">&times;</button>
+      <h3 id="events-modal-title">All Upcoming Events</h3>
+      <div class="events-modal-content" id="events-modal-content">
+        <!-- Events will be dynamically loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Details Modal -->
+  <div class="modal-overlay" id="event-details-modal" aria-hidden="true">
+    <div class="modal modal--event-details" role="dialog" aria-labelledby="event-details-modal-title">
+      <button type="button" class="modal-close" id="event-details-modal-close" aria-label="Close">&times;</button>
+      <div id="event-details-content">
+        <!-- Event details will be dynamically loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-text">GO TO TOP AND EXPLORE PAGES. THANK YOU!</p>
+      <a href="#main" class="footer-top">Back to top</a>
+      <p style="font-size: small; text-align: center; color: var(--text-muted); margin-top: 10px;">Made by MAXX CYBER</p>
+    </div>
+  </footer>
+  <button type="button" class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">↑</button>
+  <script>
+    // Free Fire Rules Folder System
+    let isAdminLoggedIn = false;
+    let editMode = false;
+    let currentFolder = null;
+    let currentPath = [];
+    const ADMIN_PASSWORD = 'oligarchsuyir@2026esportsadasjvdyjsu@26378';
+
+    // Free Fire Rules Data Structure
+    const rulesData = {
+      folders: [
+        {
+          id: 'general',
+          name: 'General Rules',
+          icon: '📋',
+          description: 'Basic tournament guidelines and management',
+          content: `
+            <h2>📋 General Rules & Management Rights</h2>
+            <h3>Tournament Authority</h3>
+            <ul>
+              <li>Oligarchs Esports management has full authority over all tournament decisions</li>
+              <li>Management reserves the right to modify rules for unforeseen circumstances</li>
+              <li>All decisions made by tournament staff are final and binding</li>
+              <li>Players must comply with all staff instructions during matches</li>
+            </ul>
+            <h3>Tournament Format</h3>
+            <ul>
+              <li>Format: Squad Mode (4 players per team)</li>
+              <li>Map: Bermuda, Purgatory, Kalahari (Rotating)</li>
+              <li>Duration: 12 matches total</li>
+              <li>Scoring: Kill points + Placement points</li>
+            </ul>
+            <div class="warning">
+              <strong>⚠️ Important:</strong> Participation in this tournament implies full acceptance of these rules and agreement to abide by all Tournament Staff decisions.
+            </div>
+          `
+        },
+        {
+          id: 'player',
+          name: 'Player Requirements',
+          icon: '👤',
+          description: 'Account and device specifications',
+          content: `
+            <h2>👤 Player Requirements & Eligibility</h2>
+            <h3>Device & Account Requirements</h3>
+            <ul>
+              <li><strong>Device:</strong> Only smartphones allowed (Android/iOS)</li>
+              <li><strong>Prohibited:</strong> PCs, laptops, tablets, consoles, triggers, emulators</li>
+              <li><strong>Account Level:</strong> Minimum Level 40 required</li>
+              <li><strong>Account Status:</strong> Must be in good standing (no bans)</li>
+              <li><strong>Personal Account:</strong> Must use own registered account</li>
+            </ul>
+            <h3>Player Conduct</h3>
+            <ul>
+              <li>Professional behavior expected at all times</li>
+              <li>No abusive language in game chat or lobby</li>
+              <li>Respect for opponents and tournament staff</li>
+              <li>Sportsmanlike conduct mandatory</li>
+            </ul>
+            <table>
+              <thead>
+                <tr>
+                  <th>Requirement</th>
+                  <th>Specification</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Account Level</td>
+                  <td>40+</td>
+                  <td>Verified at registration</td>
+                </tr>
+                <tr>
+                  <td>Team Size</td>
+                  <td>4 Players</td>
+                  <td>2 substitutes allowed</td>
+                </tr>
+                <tr>
+                  <td>Device</td>
+                  <td>Smartphone Only</td>
+                  <td>No emulators allowed</td>
+                </tr>
+              </tbody>
+            </table>
+          `
+        },
+        {
+          id: 'registration',
+          name: 'Registration Policy',
+          icon: '📝',
+          description: 'Team registration and slot management',
+          content: `
+            <h2>📝 Registration Policy & Team Management</h2>
+            <h3>Registration Requirements</h3>
+            <ul>
+              <li>All submitted information must be 100% accurate</li>
+              <li>No changes allowed after registration deadline</li>
+              <li>Maximum 6 players per team (4 main + 2 substitutes)</li>
+              <li>Team captain must be clearly identified</li>
+              <li>Contact information must be valid and responsive</li>
+            </ul>
+            <h3>Slot Management</h3>
+            <ul>
+              <li>Slot switching between teams is strictly prohibited</li>
+              <li>More than 6 registered players results in immediate cancellation</li>
+              <li>Unregistered players cannot participate under any circumstances</li>
+              <li>Using unregistered players in Grand Finals = instant disqualification</li>
+            </ul>
+            <div class="note">
+              <strong>📝 Note:</strong> Teams must send team name and slot number in tournament chat 15 minutes before match start.
+            </div>
+          `
+        },
+        {
+          id: 'gameplay',
+          name: 'Gameplay Rules',
+          icon: '🎮',
+          description: 'In-game regulations and conduct',
+          content: `
+            <h2>🎮 Gameplay Rules & Match Procedures</h2>
+            <h3>Room Entry & Match Start</h3>
+            <ul>
+              <li>Teams must join rooms on time - no buffer period provided</li>
+              <li>Only full squads (4 players) allowed in rooms</li>
+              <li>Room code and password will be shared in tournament chat</li>
+              <li>10-minute grace period for late entry (after which slot is forfeited)</li>
+            </ul>
+            <h3>In-Game Regulations</h3>
+            <ul>
+              <li>No teaming or collaboration with other squads</li>
+              <li>No bug exploitation or glitch usage</li>
+              <li>Default skins only (no premium cosmetic advantages)</li>
+              <li>No third-party apps or modifications</li>
+            </ul>
+            <h3>Scoring System</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Placement</th>
+                  <th>Points</th>
+                  <th>Kill Points</th>
+                  <th>Total Possible</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1st</td>
+                  <td>15</td>
+                  <td>1 per kill</td>
+                  <td>19 + kills</td>
+                </tr>
+                <tr>
+                  <td>2nd</td>
+                  <td>12</td>
+                  <td>1 per kill</td>
+                  <td>16 + kills</td>
+                </tr>
+                <tr>
+                  <td>3rd</td>
+                  <td>10</td>
+                  <td>1 per kill</td>
+                  <td>14 + kills</td>
+                </tr>
+                <tr>
+                  <td>4th</td>
+                  <td>8</td>
+                  <td>1 per kill</td>
+                  <td>12 + kills</td>
+                </tr>
+                <tr>
+                  <td>5th-12th</td>
+                  <td>6-1</td>
+                  <td>1 per kill</td>
+                  <td>7-12 + kills</td>
+                </tr>
+              </tbody>
+            </table>
+          `
+        },
+        {
+          id: 'penalties',
+          name: 'Penalties & Bans',
+          icon: '⚠️',
+          description: 'Violations and consequences',
+          content: `
+            <h2>⚠️ Penalties & Ban Policy</h2>
+            <h3>Minor Violations</h3>
+            <ul>
+              <li>Late arrival: Warning for first offense, point deduction for repeat</li>
+              <li>Abusive chat: 5-10 point deduction per offense</li>
+              <li>Unsportsmanlike conduct: 10-20 point deduction</li>
+              <li>Not following staff instructions: 15 point deduction</li>
+            </ul>
+            <h3>Major Violations</h3>
+            <ul>
+              <li>Cheating/hacking: Immediate permanent ban from all tournaments</li>
+              <li>Using unregistered players: Immediate disqualification</li>
+              <li>Account sharing: Disqualification + 6-month ban</li>
+              <li>Teaming with other squads: Match nullification + 20 point deduction</li>
+            </ul>
+            <div class="warning">
+              <strong>⚠️ Zero Tolerance:</strong> Any form of cheating, hacking, or exploiting will result in immediate permanent ban from all OLIGARCHS Esports tournaments.
+            </div>
+          `
+        },
+        {
+          id: 'prizes',
+          name: 'Prize Distribution',
+          icon: '🏆',
+          description: 'Winnings and payment process',
+          content: `
+            <h2>🏆 Prize Distribution & Payment</h2>
+            <h3>Prize Structure</h3>
+            <ul>
+              <li>Prize pool varies by tournament (specified in event details)</li>
+              <li>Top 3 teams typically receive prizes</li>
+              <li>Prize distribution based on final standings</li>
+              <li>All prizes are in local currency unless specified otherwise</li>
+            </ul>
+            <h3>Payment Process</h3>
+            <ul>
+              <li>Winners must provide valid payment details within 48 hours</li>
+              <li>Payment processing takes 3-7 business days</li>
+              <li>Transaction fees may apply (platform dependent)</li>
+              <li>Tax responsibilities belong to winners</li>
+            </ul>
+            <h3>Prize Claim Requirements</h3>
+            <ul>
+              <li>Valid government ID required for verification</li>
+              <li>Bank account or payment platform details</li>
+              <li>Attendance at prize ceremony (if applicable)</li>
+              <li>Social media promotion of win (optional but appreciated)</li>
+            </ul>
+          `
+        },
+        {
+          id: 'contact',
+          name: 'Contact & Support',
+          icon: '📞',
+          description: 'Help and communication channels',
+          content: `
+            <h2>📞 Contact & Support Channels</h2>
+            <h3>Official Communication</h3>
+            <ul>
+              <li><strong>Instagram:</strong> @oligarchs.esp (Primary contact)</li>
+              <li><strong>Email:</strong> oligarchesesports@gmail.com</li>
+              <li><strong>Discord:</strong> OLIGARCHS Esports Server</li>
+              <li><strong>WhatsApp:</strong> Tournament management group</li>
+            </ul>
+            <h3>Support Hours</h3>
+            <ul>
+              <li>Monday - Friday: 10:00 AM - 10:00 PM</li>
+              <li>Saturday - Sunday: 9:00 AM - 11:00 PM</li>
+              <li>Tournament days: 24/7 support available</li>
+              <li>Response time: Typically within 2 hours</li>
+            </ul>
+            <h3>Emergency Contact</h3>
+            <ul>
+              <li>For urgent tournament issues: WhatsApp priority line</li>
+              <li>Technical difficulties during matches: Direct message to host</li>
+              <li>Payment issues: Email with transaction ID</li>
+            </ul>
+          `
+        },
+        {
+          id: 'fairplay',
+          name: 'Fair Play Policy',
+          icon: '🛡️',
+          description: 'Anti-cheat and sportsmanship',
+          content: `
+            <h2>🛡️ Fair Play & Anti-Cheat Policy</h2>
+            <h3>Prohibited Actions</h3>
+            <ul>
+              <li>Any form of cheating or hacking</li>
+              <li>Using third-party software for advantage</li>
+              <li>Exploiting game bugs or glitches</li>
+              <li>Account sharing or using others' accounts</li>
+              <li>Collaboration with other teams (teaming)</li>
+              <li>Intentional disconnection or match manipulation</li>
+            </ul>
+            <h3>Detection & Enforcement</h3>
+            <ul>
+              <li>Manual monitoring by tournament staff</li>
+              <li>Player reporting system</li>
+              <li>Post-match replay analysis</li>
+              <li>Suspicious activity investigation</li>
+            </ul>
+            <h3>Appeals Process</h3>
+            <ul>
+              <li>Appeals must be submitted within 24 hours of decision</li>
+              <li>Written explanation with evidence required</li>
+              <li>Review committee decision is final</li>
+              <li>False appeals may result in additional penalties</li>
+            </ul>
+            <div class="warning">
+              <strong>🛡️ Fair Play Commitment:</strong> OLIGARCHS Esports is committed to maintaining a fair and competitive environment for all players. We have zero tolerance for cheating.
+            </div>
+          `
+        }
+      ]
+    };
+
+    // Check if user is admin
+    function checkIfAdmin() {
+      const userRole = localStorage.getItem('user_role');
+      const userEmail = localStorage.getItem('user_email');
+      return userEmail === 'oligarchesesports@gmail.com' || userRole === 'admin';
+    }
+
+    // Show admin access only for admin users
+    function showAdminAccess() {
+      if (checkIfAdmin()) {
+        document.getElementById('admin-trigger').style.display = 'block';
+      }
+    }
+
+    // Show admin login modal
+    function showAdminLogin() {
+      document.getElementById('admin-login-modal').style.display = 'block';
+      document.getElementById('admin-login-modal').setAttribute('aria-hidden', 'false');
+    }
+
+    // Close admin login modal
+    function closeAdminLoginModal() {
+      document.getElementById('admin-login-modal').style.display = 'none';
+      document.getElementById('admin-login-modal').setAttribute('aria-hidden', 'true');
+    }
+
+    // Initialize folder system
+    function initFolderSystem() {
+      renderFolders();
+      loadSavedFolders();
+      showAdminAccess();
+    }
+
+    // Render folders
+    function renderFolders() {
+      const foldersNav = document.getElementById('rules-folders-nav');
+      if (!foldersNav) return;
+
+      foldersNav.innerHTML = rulesData.folders.map(folder => createFolderElement(folder)).join('');
+      
+      // Show first folder by default
+      if (rulesData.folders.length > 0) {
+        showFolder(rulesData.folders[0].id);
+      }
+    }
+
+    // Create folder element
+    function createFolderElement(folder) {
+      const adminControls = checkIfAdmin() ? `
+        <div class="admin-folder-controls ${isAdminLoggedIn ? 'show' : ''}">
+          <button class="admin-folder-btn" onclick="editFolder('${folder.id}')">✏️</button>
+          <button class="admin-folder-btn" onclick="deleteFolder('${folder.id}')">🗑️</button>
+        </div>
+      ` : '';
+
+      return `
+        <div class="folder-item ${currentFolder === folder.id ? 'active' : ''}" onclick="showFolder('${folder.id}')">
+          <div class="folder-icon">${folder.icon}</div>
+          <div class="folder-name">${folder.name}</div>
+          <div class="folder-description">${folder.description}</div>
+          ${adminControls}
+        </div>
+      `;
+    }
+
+    // Show folder content
+    function showFolder(folderId) {
+      const folder = rulesData.folders.find(f => f.id === folderId);
+      if (!folder) return;
+
+      currentFolder = folderId;
+      currentPath = [folder.name];
+
+      // Update active state
+      document.querySelectorAll('.folder-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+
+      // Update breadcrumb
+      updateBreadcrumb();
+
+      // Show content
+      const contentArea = document.getElementById('rules-content');
+      if (contentArea) {
+        contentArea.innerHTML = folder.content;
+      }
+    }
+
+    // Update breadcrumb
+    function updateBreadcrumb() {
+      const breadcrumb = document.getElementById('rules-breadcrumb');
+      if (!breadcrumb) return;
+
+      breadcrumb.innerHTML = currentPath.map((item, index) => {
+        const isLast = index === currentPath.length - 1;
+        return `
+          <span class="breadcrumb-item ${isLast ? 'active' : ''}" ${!isLast ? `onclick="navigateToBreadcrumb(${index})"` : ''}>
+            📁 ${item}
+          </span>
+          ${!isLast ? '<span class="breadcrumb-separator">›</span>' : ''}
+        `;
+      }).join('');
+    }
+
+    // Navigate to breadcrumb
+    function navigateToBreadcrumb(index) {
+      // For now, just go back to root
+      currentPath = ['FREE FIRE RULES'];
+      updateBreadcrumb();
+      renderFolders();
+    }
+
+    // Admin functions
+    function toggleAdminPanel() {
+      const password = document.getElementById('admin-password-input').value;
+      const adminPanel = document.getElementById('admin-panel');
+      const adminSection = document.getElementById('admin-section');
+      
+      if (password === ADMIN_PASSWORD) {
+        isAdminLoggedIn = true;
+        adminSection.style.display = 'block';
+        adminPanel.classList.add('active');
+        closeAdminLoginModal();
+        document.getElementById('admin-status').textContent = '✅ Admin access granted. You can now manage folders.';
+        
+        // Show admin controls
+        document.querySelectorAll('.admin-folder-controls').forEach(control => {
+          control.classList.add('show');
+        });
+        
+        // Add admin controls to panel
+        updateAdminPanel();
+      } else {
+        alert('❌ Incorrect password. Access denied.');
+        document.getElementById('admin-password-input').value = '';
+      }
+    }
+
+    // Update admin panel
+    function updateAdminPanel() {
+      const adminControls = document.querySelector('.admin-controls');
+      if (adminControls) {
+        adminControls.innerHTML = `
+          <button class="admin-btn" onclick="addNewFolder()">➕ Add New Folder</button>
+          <button class="admin-btn edit" onclick="toggleEditMode()">✏️ Edit Mode</button>
+          <button class="admin-btn" onclick="exportRules()">📥 Export Rules</button>
+          <button class="admin-btn" onclick="importRules()">📤 Import Rules</button>
+        `;
+      }
+    }
+
+    // Add new folder
+    function addNewFolder() {
+      if (!isAdminLoggedIn) {
+        alert('❌ Admin access required.');
+        return;
+      }
+      
+      const folderName = prompt('Enter new folder name:');
+      if (!folderName) return;
+      
+      const folderIcon = prompt('Enter folder icon (emoji):', '📁');
+      const folderDescription = prompt('Enter folder description:');
+      
+      const newFolder = {
+        id: `folder${Date.now()}`,
+        name: folderName,
+        icon: folderIcon || '📁',
+        description: folderDescription || 'Custom folder',
+        content: `<h2>${folderIcon} ${folderName}</h2><p>Add your rules content here...</p>`
+      };
+      
+      rulesData.folders.push(newFolder);
+      saveFolders();
+      renderFolders();
+      
+      document.getElementById('admin-status').textContent = `✅ New folder "${folderName}" added successfully!`;
+    }
+
+    // Edit folder
+    function editFolder(folderId) {
+      if (!isAdminLoggedIn) return;
+      
+      const folder = rulesData.folders.find(f => f.id === folderId);
+      if (!folder) return;
+      
+      const newName = prompt('Edit folder name:', folder.name);
+      if (newName) folder.name = newName;
+      
+      const newIcon = prompt('Edit folder icon:', folder.icon);
+      if (newIcon) folder.icon = newIcon;
+      
+      const newDescription = prompt('Edit folder description:', folder.description);
+      if (newDescription) folder.description = newDescription;
+      
+      saveFolders();
+      renderFolders();
+    }
+
+    // Delete folder
+    function deleteFolder(folderId) {
+      if (!isAdminLoggedIn) return;
+      
+      if (!confirm('Are you sure you want to delete this folder?')) return;
+      
+      rulesData.folders = rulesData.folders.filter(f => f.id !== folderId);
+      saveFolders();
+      renderFolders();
+      
+      document.getElementById('admin-status').textContent = '✅ Folder deleted successfully!';
+    }
+
+    // Save folders to localStorage
+    function saveFolders() {
+      localStorage.setItem('freefire_rules_folders', JSON.stringify(rulesData.folders));
+    }
+
+    // Load saved folders
+    function loadSavedFolders() {
+      const saved = localStorage.getItem('freefire_rules_folders');
+      if (saved) {
+        try {
+          rulesData.folders = JSON.parse(saved);
+        } catch (e) {
+          console.log('Could not load saved folders, using defaults');
+        }
+      }
+    }
+
+    // Export rules
+    function exportRules() {
+      if (!isAdminLoggedIn) {
+        alert('❌ Admin access required.');
+        return;
+      }
+      
+      const exportData = {
+        timestamp: new Date().toISOString(),
+        folders: rulesData.folders
+      };
+      
+      const dataStr = JSON.stringify(exportData, null, 2);
+      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+      
+      const exportFileDefaultName = `freefire-rules-${new Date().toISOString().split('T')[0]}.json`;
+      
+      const linkElement = document.createElement('a');
+      linkElement.setAttribute('href', dataUri);
+      linkElement.setAttribute('download', exportFileDefaultName);
+      linkElement.click();
+      
+      document.getElementById('admin-status').textContent = '📥 Rules exported successfully!';
+    }
+
+    // Import rules
+    function importRules() {
+      if (!isAdminLoggedIn) {
+        alert('❌ Admin access required.');
+        return;
+      }
+      
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      
+      input.onchange = e => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = event => {
+          try {
+            const importData = JSON.parse(event.target.result);
+            
+            if (importData.folders && Array.isArray(importData.folders)) {
+              rulesData.folders = importData.folders;
+              saveFolders();
+              renderFolders();
+              
+              document.getElementById('admin-status').textContent = '📤 Rules imported successfully!';
+              alert('✅ Rules imported successfully!');
+            } else {
+              alert('❌ Invalid file format.');
+            }
+          } catch (error) {
+            alert('❌ Error importing rules. Please check the file format.');
+          }
+        };
+        
+        reader.readAsText(file);
+      };
+      
+      input.click();
+    }
+
+    // Load saved content on page load
+    window.addEventListener('load', function() {
+      initFolderSystem();
+      
+      // Bind admin login modal close button
+      const closeBtn = document.getElementById('admin-login-modal-close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeAdminLoginModal);
+      }
+      
+      // Close modal on outside click
+      const modal = document.getElementById('admin-login-modal');
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeAdminLoginModal();
+        });
+      }
+    });
+  </script>
+  <script src="js/auth-security.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/maxx-ai.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/events-gallery.js"></script>
+  <script src="js/admin-editor.js"></script>
+  <script>
+    // Hamburger menu toggle
+   document.getElementById('nav-toggle').addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      document.getElementById('main-nav').classList.toggle('is-open');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function (e) {
+      const nav = document.getElementById('main-nav');
+      const toggle = document.getElementById('nav-toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target) && nav.classList.contains('is-open')) {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    if (document.querySelector('.brand-link')) document.querySelector('.brand-link').addEventListener('click', function() {});
+    window.addEventListener('load', function() { var l = document.getElementById('loader-overlay'); if (l) { l.classList.add('hidden'); l.setAttribute('aria-hidden', 'true'); } });
+    setTimeout(function() { var l = document.getElementById('loader-overlay'); if (l && !l.classList.contains('hidden')) l.classList.add('hidden'); }, 4000);
+    var st = document.getElementById('scroll-to-top'); if (st) { window.addEventListener('scroll', function() { st.classList.toggle('visible', window.scrollY > 400); }); st.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
+  </script>
+</body>
+</html>

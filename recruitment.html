@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruitment – OLIGARCHS Esports</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .recruitment-wrap {
+      max-width: 920px;
+      margin: 2.5rem auto;
+      padding: 0 1.25rem;
+    }
+
+    .recruitment-hero {
+      background: linear-gradient(135deg, var(--bg-elevated), var(--bg-dark));
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .recruitment-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red-primary), var(--red-hover));
+    }
+
+    .recruitment-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 900;
+      margin: 0 0 0.5rem 0;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .recruitment-subtitle {
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .focus-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      background: rgba(196, 30, 58, 0.12);
+      border: 1px solid rgba(196, 30, 58, 0.35);
+      color: var(--text);
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .recruitment-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.25rem;
+    }
+
+    .recruitment-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .recruitment-card h2 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin: 0 0 1rem 0;
+      color: var(--text);
+    }
+
+    .recruitment-card p {
+      color: var(--text-muted);
+      margin: 0 0 1rem 0;
+      line-height: 1.6;
+    }
+
+    .req-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--text);
+    }
+
+    .req-list li {
+      margin: 0.45rem 0;
+      color: var(--text-muted);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+
+    .form-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 0.75rem 0.85rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .hint {
+      margin-top: 0.35rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .submit-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .submit-note {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .success-msg {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(39, 174, 96, 0.45);
+      background: rgba(39, 174, 96, 0.12);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .recruitment-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader-overlay" id="loader-overlay" aria-hidden="false">
+    <img src="assets/logo.png" alt="OLIGARCHS" class="loader-logo">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading...</p>
+  </div>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="#nav" class="skip-link">Skip to navigation</a>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="brand">
+          <a href="index.html" class="brand-link">
+            <img src="assets/logo-header.png" alt="OLIGARCHS ESPORTS" class="header-logo">
+            <span class="site-name">OLIGARCHS ESPORTS</span>
+          </a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav">
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+        </button>
+        <div class="auth-buttons">
+          <button type="button" class="btn btn--outline" id="auth-login-btn">Login</button>
+          <button type="button" class="btn btn--primary" id="auth-signup-btn">Sign Up</button>
+        </div>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="community-reg.html" class="nav-link">Community Reg</a></li>
+          <li><a href="rulebook.html" class="nav-link">Rulebook</a></li>
+          <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+          <li><a href="recruitment.html" class="nav-link active">Recruitment</a></li>
+          <li><a href="#events" class="nav-link" onclick="openEventsModal()">Events</a></li>
+          <li><a href="tournaments.html" class="nav-link">Tournaments</a></li>
+          <li><a href="tournaments.html#host" class="nav-link">Host Tournament</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="recruitment-wrap">
+      <section class="recruitment-hero">
+        <h1 class="recruitment-title">Join OLIGARCHS Esports</h1>
+        <p class="recruitment-subtitle">Apply to join the OLIGARCHS team. If you have the skill, discipline, and mindset, submit your details below.</p>
+      </section>
+
+      <section class="recruitment-grid">
+        <div class="recruitment-card">
+          <h2>Player Application</h2>
+          <p>Please fill the form carefully. Make sure your details are correct.</p>
+
+          <form id="recruitment-form">
+            <div class="form-grid">
+              <div class="field">
+                <label for="player-name">Full Name</label>
+                <input id="player-name" name="playerName" type="text" required>
+              </div>
+
+              <div class="field">
+                <label for="player-age">Age</label>
+                <input id="player-age" name="age" type="number" min="10" max="60" required>
+              </div>
+
+              <div class="field">
+                <label for="player-email">Email</label>
+                <input id="player-email" name="email" type="email" required>
+              </div>
+
+              <div class="field">
+                <label for="player-phone">Phone / WhatsApp</label>
+                <input id="player-phone" name="phone" type="text" required>
+              </div>
+
+              <div class="field">
+                <label for="ff-uid">Free Fire UID</label>
+                <input id="ff-uid" name="ffUid" type="text" required>
+              </div>
+
+              <div class="field">
+                <label for="ff-ign">In-Game Name (IGN)</label>
+                <input id="ff-ign" name="ffIgn" type="text" required>
+              </div>
+
+              <div class="field">
+                <label for="role">Preferred Role</label>
+                <select id="role" name="role" required>
+                  <option value="" selected disabled>Select</option>
+                  <option value="rusher">Rusher</option>
+                  <option value="support">Support</option>
+                  <option value="igl">IGL (In-Game Leader)</option>
+                  <option value="sniper">Sniper</option>
+                  <option value="flex">Flex</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="device">Device</label>
+                <select id="device" name="device" required>
+                  <option value="" selected disabled>Select</option>
+                  <option value="android">Android</option>
+                  <option value="ios">iOS</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="experience">Experience / Achievements</label>
+                <textarea id="experience" name="experience" required></textarea>
+                <div class="hint">Write your tournament experience and achievements.</div>
+              </div>
+
+              <div class="field full">
+                <label for="availability">Availability</label>
+                <input id="availability" name="availability" type="text" required>
+                <div class="hint">Example: Daily 7PM–11PM (IST) / Weekends only / etc.</div>
+              </div>
+
+              <div class="field full">
+                <label for="links">Gameplay Links (Optional)</label>
+                <input id="links" name="links" type="text">
+                <div class="hint">YouTube / Instagram / Drive link to clips.</div>
+              </div>
+            </div>
+
+            <div class="submit-row">
+              <button type="submit" class="btn btn--primary">Submit Application</button>
+              <span class="submit-note">Your details will be sent to OLIGARCHS management.</span>
+            </div>
+
+            <div class="success-msg" id="recruitment-success">✅ Application submitted.</div>
+          </form>
+        </div>
+
+        <aside class="recruitment-card">
+          <h2>Requirements</h2>
+          <ul class="req-list">
+            <li>Free Fire player (shooting game) only</li>
+            <li>Good communication + discipline</li>
+            <li>Stable internet and consistent availability</li>
+            <li>Willing to practice and follow team rules</li>
+          </ul>
+
+          <h2 style="margin-top: 1.25rem;">Contact</h2>
+          <p>If you face any issue, contact OLIGARCHS on Instagram.</p>
+          <a class="btn btn--secondary" href="https://www.instagram.com/oligarchs.esp" target="_blank" rel="noopener">Open Instagram</a>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <!-- Auth Modal (same on all pages) -->
+  <div class="modal-overlay" id="auth-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="auth-modal-title">
+      <button type="button" class="modal-close" id="auth-modal-close" aria-label="Close">&times;</button>
+      <h3 id="auth-modal-title">Login / Sign Up</h3>
+      <div class="auth-modal-tabs">
+        <button type="button" class="auth-modal-tab active" id="auth-tab-login">Login</button>
+        <button type="button" class="auth-modal-tab" id="auth-tab-signup">Sign Up</button>
+      </div>
+      <form id="auth-login-form" class="auth-form" style="display: block;">
+        <div class="auth-form-group"><label for="auth-login-email">Email</label><input type="email" id="auth-login-email" name="email" required placeholder="your@email.com"></div>
+        <div class="auth-form-group"><label for="auth-login-password">Password</label><input type="password" id="auth-login-password" name="password" required placeholder="Password"></div>
+        <button type="submit" class="btn btn--primary" style="width: 100%;">Login</button>
+      </form>
+      <form id="auth-signup-form" class="auth-form" style="display: none;">
+        <div class="auth-form-row"><div class="auth-form-group"><label>First Name</label><input type="text" name="firstName" required placeholder="John"></div><div class="auth-form-group"><label>Last Name</label><input type="text" name="lastName" required placeholder="Doe"></div></div>
+        <div class="auth-form-group"><label>Email</label><input type="email" name="email" required placeholder="your@email.com"></div>
+        <div class="auth-form-group"><label>Username</label><input type="text" name="username" required placeholder="gamer123"></div>
+        <div class="auth-form-group"><label>Password</label><input type="password" name="password" required placeholder="Min 8 chars, upper, lower, number"></div>
+        <div class="auth-form-group"><label>Confirm Password</label><input type="password" name="confirmPassword" required placeholder="Re-enter password"></div>
+        <div class="auth-form-group"><label style="display: flex; align-items: flex-start; gap: 0.5rem; font-weight: 400; text-transform: none;"><input type="checkbox" name="terms" required><span>I agree to <a href="community-reg.html" target="_blank">Community Reg</a> & <a href="rulebook.html" target="_blank">Rulebook</a></span></label></div>
+        <button type="submit" class="btn btn--primary" style="width: 100%;">Create Account</button>
+      </form>
+      <p id="auth-message" style="margin-top: 1rem; text-align: center; font-size: 0.9rem;"></p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-text">GO TO TOP AND EXPLORE PAGES. THANK YOU!</p>
+      <a href="#main" class="footer-top">Back to top</a>
+      <p style="font-size: small; text-align: center; color: var(--text-muted); margin-top: 10px;">Made by MAXX CYBER</p>
+    </div>
+  </footer>
+  <button type="button" class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">↑</button>
+  <!-- Events Modal -->
+  <div class="modal-overlay" id="events-modal" aria-hidden="true">
+    <div class="modal modal--events" role="dialog" aria-labelledby="events-modal-title">
+      <button type="button" class="modal-close" id="events-modal-close" aria-label="Close">&times;</button>
+      <h3 id="events-modal-title">All Events</h3>
+      <div class="events-modal-content" id="events-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Event Details Modal -->
+  <div class="modal-overlay" id="event-details-modal" aria-hidden="true">
+    <div class="modal modal--event-details" role="dialog" aria-labelledby="event-details-modal-title">
+      <button type="button" class="modal-close" id="event-details-modal-close" aria-label="Close">&times;</button>
+      <div id="event-details-content"></div>
+    </div>
+  </div>
+
+  <script src="js/auth-security.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/maxx-ai.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/events-gallery.js"></script>
+  <script src="js/admin-editor.js"></script>
+  <script>
+    // Hamburger menu toggle
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      document.getElementById('main-nav').classList.toggle('is-open');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function (e) {
+      const nav = document.getElementById('main-nav');
+      const toggle = document.getElementById('nav-toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target) && nav.classList.contains('is-open')) {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    if (document.querySelector('.brand-link')) document.querySelector('.brand-link').addEventListener('click', function() {});
+    window.addEventListener('load', function() { var l = document.getElementById('loader-overlay'); if (l) { l.classList.add('hidden'); l.setAttribute('aria-hidden', 'true'); } });
+    setTimeout(function() { var l = document.getElementById('loader-overlay'); if (l && !l.classList.contains('hidden')) l.classList.add('hidden'); }, 4000);
+    var st = document.getElementById('scroll-to-top'); if (st) { window.addEventListener('scroll', function() { st.classList.toggle('visible', window.scrollY > 400); }); st.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
+
+    const form = document.getElementById('recruitment-form');
+    const success = document.getElementById('recruitment-success');
+
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (window.OligarchsAuth.isRateLimited('recruitment')) {
+          window.OligarchsAuth.showRateLimitMessage('recruitment');
+          return;
+        }
+        const payload = window.OligarchsAuth.sanitizeForm(e.target);
+        payload.createdAt = new Date().toISOString();
+
+        const key = 'oligarchs_recruitment_apps';
+        const existing = localStorage.getItem(key);
+        const list = existing ? JSON.parse(existing) : [];
+        list.push(payload);
+        localStorage.setItem(key, JSON.stringify(list));
+
+        form.reset();
+        success.style.display = 'block';
+        setTimeout(() => {
+          success.style.display = 'none';
+        }, 2500);
+      });
+    }
+  </script>
+</body>
+</html>
